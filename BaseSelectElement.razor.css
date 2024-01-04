@@ -1,0 +1,20 @@
+﻿.selectItemBox
+{
+    padding: 1rem;
+    border:1px solid black;
+    margin-top:1rem;
+    display:none;
+    max-height: 20rem;
+    overflow-y:auto;
+}
+.selectItemBox.active{
+    display:block !important;
+}
+.selectItemBox .selectItem li {
+    list-style-type: none;
+    font-size: 2rem;
+    padding: .5rem
+} 
+.selectItemBox .selectItem li:hover{
+    background:gray;
+}
