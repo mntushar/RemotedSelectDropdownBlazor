@@ -3,12 +3,17 @@
     {
         <div class="selectBox" tabindex="0" @ref="SelectBoxRef">
             <div class="selectItemBox active">
+                <span class="search_icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
                 <ul class="selectItem">
                     <input id="SearchInput" type="text" @bind="NameSearch" @bind:event="oninput"
                            placeholder="Enter your search key" />
                     <Virtualize @ref="VirtualRef" Context="_context" ItemsProvider="@ProvideVirtualizedItemsAync">
                         <ItemContent>
-                            <li @onclick="@(() => SelectData(_context))">@_context.Name</li>
+                           <div class="selectElm">
+                                <span @onclick="@(() => SelectData(_context))" for="brand">@_context.Name</span>
+                           </div>
                         </ItemContent>
                         <Placeholder>
                             <p>
@@ -30,9 +35,15 @@
         <div class="selectBox" tabindex="0" @ref="SelectBoxRef" @onblur="@(() => SelectInputBlurred())">
             <input id="@SelectId-input" class="selectInput" type="text" value="@SelectedItem"
                    placeholder="@Placeholder" @onfocus="@(() => SelectInputFocused())" />
+                   <span class="up_down_arrow">
+                <i class="fa-solid fa-arrows-up-down"></i>
+                   </span>
             @if (_isSelectItemBoxActive)
             {
                 <div class="selectItemBox active">
+                    <span class="search_icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
                     <ul class="selectItem">
                         <input id="SearchInput" type="text" @bind="NameSearch"
                                placeholder="Enter your search key" @bind:event="oninput"

@@ -1,20 +1,114 @@
-﻿.selectItemBox
-{
-    padding: 1rem;
-    border:1px solid black;
-    margin-top:1rem;
-    display:none;
+﻿/*#stockProductId .selectBox .selectItemBox {
+    position: relative !important;
+}*/
+#stockFormRight.selectItemBox{
+    position:relative;
+}
+.selectItemBox {
+    position: absolute;
+    background: white;
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index:99;
+}
+.search_icon {
+    position: sticky;
+    left: 100%;
+    top: 1rem;
+    font-size: 1.5rem;
+    z-index: 999;
+    display: inline;
+    background: white;
+    padding: 7px
+}
+    .selectItemBox::-webkit-scrollbar {
+    background-color: transparent;
+    width: .5rem;
+}
+ .selectItemBox::-webkit-scrollbar-thumb {
+        background-color: hsla(0, 0%, 46%, 0.5);
+        border-radius: 8px;
+        width:1rem;
+    }
+ .selectItem li {
+        width: 100%;
+        padding: .5rem .7rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        border-bottom: 1px dashed gray;
+    }
+         .selectItem li:hover {
+            background: #ebe9e9;
+        }
+    .selectBox .selectInput {
+        border-radius: 7px;
+        border: 1px solid #e2e2e2;
+        outline: none;
+        cursor:pointer;
+    }
+
+.selectItemBox {
+    padding:0 1rem 1rem;
+    display: block;
     max-height: 20rem;
-    overflow-y:auto;
+    min-height:20rem;
+    overflow-y: auto;
+
 }
-.selectItemBox.active{
-    display:block !important;
+
+.selectItem {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: .4rem;
+    flex-direction: column;
 }
-.selectItemBox .selectItem li {
-    list-style-type: none;
-    font-size: 2rem;
-    padding: .5rem
-} 
-.selectItemBox .selectItem li:hover{
-    background:gray;
+    .selectItem #SearchInput {
+        position: sticky;
+        top: 0;
+        left:0;
+        border:none;
+        border-bottom:1px solid black;
+        border-radius:0;
+    outline:none;
+    width:90%;
+    }
+.selectElm {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 3px;
+    width: 100%;
+}
+
+    .selectElm span {
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-transform: capitalize;
+        width: 100%;
+        padding: 4px 0;
+    }
+    .selectElm:hover {
+        background: #e3e3e3;
+        cursor:pointer;
+    }
+
+.selectBox {
+    position: relative;
+    cursor:pointer;
+}
+
+.up_down_arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (min-width: 320px) and (max-width:767.99px) {
+    .selectCategory label{
+        padding-bottom: 1rem;
+    }
 }
