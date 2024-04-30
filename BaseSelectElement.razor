@@ -33,7 +33,7 @@
     else
     {
         <div class="selectBox" tabindex="0" @ref="SelectBoxRef" @onblur="@(() => SelectInputBlurred())">
-            <input id="@SelectId-input" class="selectInput" type="text" value="@SelectedItem"
+            <input id="@SelectId-input" class="selectInput" autocomplete="off" type="text" value="@SelectedItem"
                    placeholder="@Placeholder" @onfocus="@(() => SelectInputFocused())" />
                    <span class="up_down_arrow">
                 <i class="fa-solid fa-arrows-up-down"></i>
