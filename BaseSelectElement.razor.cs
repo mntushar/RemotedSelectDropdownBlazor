@@ -38,7 +38,7 @@ public partial class BaseSelectElement
     [Parameter]
     public string? SelectedItem { get; set; }
     [Parameter]
-    public BaseSelecterItemsProvider? SelectItemProvider { get; set; }
+    public Delegate? SelectItemProvider { get; set; }
     [Parameter]
     public EventCallback<SelectElement> SelectedOutput { get; set; }
 
@@ -85,6 +85,13 @@ public partial class BaseSelectElement
         await SelectedOutput.InvokeAsync(element);
     }
 
+    private async Task CleanData()
+    {
+        SelectedItem = null;
+        _searchKey = null;
+        await SelectedOutput.InvokeAsync(new SelectElement());
+    }
+
     public async Task Refresh()
     {
         if (VirtualRef != null)
@@ -97,22 +104,31 @@ public partial class BaseSelectElement
     private async ValueTask<ItemsProviderResult<SelectElement>> ProvideVirtualizedItemsAync(
         ItemsProviderRequest request)
     {
-        await Task.Delay(100);
-
         if (request.CancellationToken.IsCancellationRequested) return default;
 
         if (SelectItemProvider != null)
         {
-            return await SelectItemProvider.Invoke(new BaseSelectElementRequest()
+            BaseSelectElementRequest baseSelectElementRequest = new BaseSelectElementRequest()
             {
                 StartIndex = request.StartIndex,
                 Count = request.Count,
                 CancellationToken = request.CancellationToken,
                 SearchKey = _searchKey
-            });
+            };
+            object?[]? objects = { baseSelectElementRequest };
+            object? result = SelectItemProvider.DynamicInvoke(objects);
+
+            if (result is ValueTask<ItemsProviderResult<SelectElement>> valueTaskResult)
+            {
+                return await valueTaskResult;
+            }
+            else
+            {
+                throw new Exception("SelectItemProvider is not a SelectElement delegate type");
+            }
         }
 
-        return default;
+        return new ItemsProviderResult<SelectElement>(new List<SelectElement>(), 0);
     }
 }
 

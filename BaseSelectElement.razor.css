@@ -1,8 +1,10 @@
-﻿/*#stockProductId .selectBox .selectItemBox {
-    position: relative !important;
-}*/
-#stockFormRight.selectItemBox{
-    position:relative;
+﻿/* For virtualized grids, it's essential that all rows have the same known height */
+ul li {
+    height: 30px;
+}
+
+#stockFormRight.selectItemBox {
+    position: relative;
 }
 .selectItemBox {
     position: absolute;
@@ -10,50 +12,52 @@
     width: 100%;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    z-index:99;
+    z-index: 99;
+    padding: 1rem;
+    display: block;
 }
-.search_icon {
-    position: sticky;
-    left: 100%;
-    top: 1rem;
-    font-size: 1.5rem;
-    z-index: 999;
-    display: inline;
-    background: white;
-    padding: 7px
+.search_box{
+    display:flex;
 }
-    .selectItemBox::-webkit-scrollbar {
-    background-color: transparent;
-    width: .5rem;
-}
- .selectItemBox::-webkit-scrollbar-thumb {
-        background-color: hsla(0, 0%, 46%, 0.5);
-        border-radius: 8px;
-        width:1rem;
-    }
- .selectItem li {
+
+    .search_box #SearchInput {
+        padding: .5rem;
         width: 100%;
-        padding: .5rem .7rem;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        border-radius: 7px;
+        border: 1px solid #e2e2e2;
+        outline: none;
         cursor: pointer;
-        border-bottom: 1px dashed gray;
     }
+
+    .search_icon {
+        display: inline;
+        font-size: 1.5rem;
+        background: white;
+        padding: 7px
+    }
+
+            .selectItem li {
+                min-width: 100%;
+                width: auto;
+                padding: .5rem .7rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+                border-bottom: 1px dashed gray;
+                white-space: nowrap;
+            }
          .selectItem li:hover {
             background: #ebe9e9;
         }
     .selectBox .selectInput {
-        border-radius: 7px;
-        border: 1px solid #e2e2e2;
+        border-radius: 5px;
         outline: none;
         cursor:pointer;
     }
 
 .selectItemBox {
-    padding:0 1rem 1rem;
-    display: block;
-    max-height: 20rem;
-    min-height:20rem;
-    overflow-y: auto;
+  
+ 
 
 }
 
@@ -64,16 +68,29 @@
     align-items: flex-start;
     gap: .4rem;
     flex-direction: column;
+    max-height: 20rem;
+    min-height: 20rem;
+    overflow: auto;
 }
     .selectItem #SearchInput {
-        position: sticky;
-        top: 0;
-        left:0;
-        border:none;
-        border-bottom:1px solid black;
-        border-radius:0;
-    outline:none;
-    width:90%;
+        font-size: 1.2rem;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+        outline: none;
+        width: 90%;
+    }
+
+    .selectItem::-webkit-scrollbar {
+        background-color: transparent;
+        width: .5rem;
+        height: .5rem;
+    }
+
+    .selectItem::-webkit-scrollbar-thumb {
+        background-color: hsla(0, 0%, 46%, 0.5);
+        border-radius: 8px;
+        width: 1rem;
     }
 .selectElm {
     display: flex;
@@ -97,7 +114,9 @@
 
 .selectBox {
     position: relative;
-    cursor:pointer;
+    cursor: pointer;
+    border: 1px solid lightgray;
+    border-radius: 5px;
 }
 
 .up_down_arrow {
@@ -105,8 +124,23 @@
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
+    .up_down_arrow button {
+        width: 22px;
+        min-width: 20px;
+        height: 22px;
+        padding: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+    }
 
+        .up_down_arrow button img {
+            width: 100%;
+        }
 @media (min-width: 320px) and (max-width:767.99px) {
     .selectCategory label{
         padding-bottom: 1rem;

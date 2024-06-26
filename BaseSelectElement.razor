@@ -8,22 +8,23 @@
                 </span>
                 <ul class="selectItem">
                     <input id="SearchInput" type="text" @bind="NameSearch" @bind:event="oninput"
-                           placeholder="Enter your search key" />
+                           placeholder="Search..." />
+
                     <Virtualize @ref="VirtualRef" Context="_context" ItemsProvider="@ProvideVirtualizedItemsAync">
                         <ItemContent>
-                           <div class="selectElm">
+                            <li class="selectElm">
                                 <span @onclick="@(() => SelectData(_context))" for="brand">@_context.Name</span>
-                           </div>
+                            </li>
                         </ItemContent>
                         <Placeholder>
-                            <p>
+                            <li>
                                 Loading&hellip;
-                            </p>
+                            </li>
                         </Placeholder>
                         <EmptyContent>
-                            <p>
+                            <li>
                                 There are no strings to display.
-                            </p>
+                            </li>
                         </EmptyContent>
                     </Virtualize>
                 </ul>
@@ -35,33 +36,42 @@
         <div class="selectBox" tabindex="0" @ref="SelectBoxRef" @onblur="@(() => SelectInputBlurred())">
             <input id="@SelectId-input" class="selectInput" autocomplete="off" type="text" value="@SelectedItem"
                    placeholder="@Placeholder" @onfocus="@(() => SelectInputFocused())" />
-                   <span class="up_down_arrow">
+            <span class="up_down_arrow">
+                @if (SelectedItem != null && !string.IsNullOrEmpty(SelectedItem))
+                {
+                    <button @onclick="CleanData">
+                        <img src="./images/icons8-close-24.png" alt="icons8-close-24.png" />
+                    </button>
+                }
+                
                 <i class="fa-solid fa-arrows-up-down"></i>
-                   </span>
+            </span>
             @if (_isSelectItemBoxActive)
             {
                 <div class="selectItemBox active">
-                    <span class="search_icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                    <ul class="selectItem">
+                    <div class="search_box">
                         <input id="SearchInput" type="text" @bind="NameSearch"
-                               placeholder="Enter your search key" @bind:event="oninput"
+                               placeholder="Search..." @bind:event="oninput"
                                @onblur="@(() => SearchInputBlurred())"
                                @onmousedown="@((e) => PreventSelectBoxBlur(e))" />
+                        <span class="search_icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                    <ul class="selectItem">
                         <Virtualize @ref="VirtualRef" Context="_context" ItemsProvider="@ProvideVirtualizedItemsAync">
                             <ItemContent>
                                 <li @onclick="@(() => SelectData(_context))">@_context.Name</li>
                             </ItemContent>
                             <Placeholder>
-                                <p>
+                                <li>
                                     Loading&hellip;
-                                </p>
+                                </li>
                             </Placeholder>
                             <EmptyContent>
-                                <p>
+                                <li>
                                     There are no strings to display.
-                                </p>
+                                </li>
                             </EmptyContent>
                         </Virtualize>
                     </ul>
